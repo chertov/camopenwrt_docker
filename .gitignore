@@ -1,0 +1,9 @@
+*
+!*/
+
+!/*.sh
+!/*.md
+!/*Dockerfile
+
+!.dockerignore
+!.gitignore

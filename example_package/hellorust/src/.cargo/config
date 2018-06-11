@@ -1,0 +1,3 @@
+[build]
+target = "arm-unknown-linux-musleabi"
+#target-dir = "bin"

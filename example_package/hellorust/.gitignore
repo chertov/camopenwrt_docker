@@ -1,0 +1,11 @@
+*
+!*/
+
+!/src/**/*.rs
+!/src/Cargo.toml
+!/src/.cargo/config
+
+!*Makefile
+!*.md
+
+!*.gitignore

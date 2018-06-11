@@ -1,0 +1,5 @@
+[package]
+
+name = "hellorust"
+version = "0.0.1"
+authors = [ "Chertov Maxim <chertovmv@gmail.com>" ]
