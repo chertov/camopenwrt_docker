@@ -1,0 +1,115 @@
+diff --git a/Makefile.am b/Makefile.am
+index de057c4..5c729a2 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -7,9 +7,7 @@ aclocaldir = $(datadir)/aclocal
+ aclocal_DATA = gst-element-check-1.0.m4
+ 
+ SUBDIRS = pkgconfig \
+-	gst libs plugins tests \
+-	docs \
+-	po \
++	gst libs plugins \
+ 	m4 \
+ 	common \
+ 	data
+@@ -20,9 +18,7 @@ endif
+ 
+ # These are all the possible subdirs
+ DIST_SUBDIRS = pkgconfig \
+-	gst libs plugins tools tests \
+-	docs \
+-	po \
++	gst libs plugins tools \
+ 	m4 \
+ 	common \
+ 	data
+diff --git a/configure.ac b/configure.ac
+index 25a0924..96e7083 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -663,7 +663,7 @@ AC_CHECK_FUNC(clock_gettime, [CLOCK_GETTIME_FOUND="yes"], [
+ # With XCode 8, clock_gettime will be incorrectly detected as being available
+ # regardless of what version of OS X you target because the symbol is available
+ # in the .tbd file as a weak symbol.
+-# See: https://bugzilla.gnome.org/show_bug.cgi?id=772451 
++# See: https://bugzilla.gnome.org/show_bug.cgi?id=772451
+ #
+ # We cannot simply do AC_CHECK_FUNCS with -Wl,-no_weak_imports because the
+ # autoconf check does its own prototype declaration that doesn't trigger that
+@@ -1086,30 +1086,9 @@ libs/gst/net/Makefile
+ plugins/Makefile
+ plugins/elements/Makefile
+ plugins/tracers/Makefile
+-po/Makefile.in
+-tests/Makefile
+-tests/benchmarks/Makefile
+-tests/check/Makefile
+-tests/misc/Makefile
+-tests/examples/Makefile
+-tests/examples/adapter/Makefile
+-tests/examples/controller/Makefile
+-tests/examples/stepping/Makefile
+-tests/examples/helloworld/Makefile
+-tests/examples/memory/Makefile
+-tests/examples/netclock/Makefile
+-tests/examples/ptp/Makefile
+-tests/examples/streamiddemux/Makefile
+-tests/examples/streams/Makefile
+ tools/Makefile
+ common/Makefile
+ common/m4/Makefile
+-docs/Makefile
+-docs/gst/Makefile
+-docs/gst/gstreamer.types
+-docs/libs/Makefile
+-docs/plugins/Makefile
+-docs/version.entities
+ m4/Makefile
+ pkgconfig/Makefile
+ stamp.h
+diff --git a/gst/gstplugin.c b/gst/gstplugin.c
+index 6838afd..23e0020 100644
+--- a/gst/gstplugin.c
++++ b/gst/gstplugin.c
+@@ -776,15 +776,8 @@ _priv_gst_plugin_load_file_for_registry (const gchar * filename,
+     goto return_error;
+   }
+ 
+-  flags = G_MODULE_BIND_LOCAL;
+-  /* libgstpython.so is the gst-python plugin loader. It needs to be loaded with
+-   * G_MODULE_BIND_LAZY.
+-   *
+-   * Ideally there should be a generic way for plugins to specify that they
+-   * need to be loaded with _LAZY.
+-   * */
+-  if (strstr (filename, "libgstpython"))
+-    flags |= G_MODULE_BIND_LAZY;
++  // No need to resolve all bindings until referenced
++  flags = G_MODULE_BIND_LOCAL | G_MODULE_BIND_LAZY;
+ 
+   module = g_module_open (filename, flags);
+   if (module == NULL) {
+@@ -1404,19 +1397,19 @@ gst_plugin_list_free (GList * list)
+  * ENV + *xyz   same as above, but xyz acts as suffix filter
+  * ENV + xyz*   same as above, but xyz acts as prefix filter (is this needed?)
+  * ENV + *xyz*  same as above, but xyz acts as strstr filter (is this needed?)
+- * 
++ *
+  * same as above, with additional paths hard-coded at compile-time:
+  *   - only check paths + ... if ENV is not set or yields not paths
+  *   - always check paths + ... in addition to ENV
+  *
+  * When user specifies set of environment variables, he/she may also use e.g.
+  * "HOME/.mystuff/plugins", and we'll expand the content of $HOME with the
+- * remainder 
++ * remainder
+  */
+ 
+ /* we store in registry:
+  *  sets of:
+- *   { 
++ *   {
+  *     - environment variables (array of strings)
+  *     - last hash of env variable contents (uint) (so we can avoid doing stats
+  *       if one of the env vars has changed; premature optimisation galore)

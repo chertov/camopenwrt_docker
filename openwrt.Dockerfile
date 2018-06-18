@@ -4,7 +4,6 @@ FROM openwrt_src
 RUN sed -i 's/CONFIG_HIETH_PHYID_U=.*/CONFIG_HIETH_PHYID_U=0/' target/linux/hisilicon/config-3.4.35.phy-xm
 RUN sed -i 's/CONFIG_HIETH_PHYID_D=.*/CONFIG_HIETH_PHYID_D=1/' target/linux/hisilicon/config-3.4.35.phy-xm
 
-RUN ./ZFT_Lab.sh update
 RUN ./ZFT_Lab.sh hi3516cv2
 
 RUN echo "#!/bin/bash\n \

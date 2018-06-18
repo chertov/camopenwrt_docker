@@ -1,0 +1,113 @@
+diff --git a/Makefile.am b/Makefile.am
+index 12cb59a..5b47de5 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -2,9 +2,6 @@ DISTCHECK_CONFIGURE_FLAGS=--enable-gtk-doc
+ 
+ ALWAYS_SUBDIRS =		\
+ 	gst sys ext 		\
+-	tests			\
+-	docs			\
+-	po			\
+ 	common			\
+ 	m4			\
+ 	pkgconfig
+diff --git a/configure.ac b/configure.ac
+index 8906014..83a4a56 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1292,29 +1292,9 @@ sys/osxvideo/Makefile
+ sys/v4l2/Makefile
+ sys/waveform/Makefile
+ sys/ximage/Makefile
+-po/Makefile.in
+-tests/Makefile
+-tests/check/Makefile
+-tests/examples/Makefile
+-tests/examples/audiofx/Makefile
+-tests/examples/cairo/Makefile
+-tests/examples/equalizer/Makefile
+-tests/examples/gtk/Makefile
+-tests/examples/jack/Makefile
+-tests/examples/level/Makefile
+-tests/examples/rtp/Makefile
+-tests/examples/rtsp/Makefile
+-tests/examples/shapewipe/Makefile
+-tests/examples/spectrum/Makefile
+-tests/examples/v4l2/Makefile
+-tests/files/Makefile
+-tests/icles/Makefile
+ common/Makefile
+ common/m4/Makefile
+ m4/Makefile
+-docs/Makefile
+-docs/plugins/Makefile
+-docs/version.entities
+ pkgconfig/Makefile
+ pkgconfig/gstreamer-plugins-good-uninstalled.pc
+ )
+@@ -1322,4 +1302,3 @@ AC_OUTPUT
+ 
+ AG_GST_OUTPUT_PLUGINS
+ ORC_OUTPUT
+-
+diff --git a/sys/v4l2/gstv4l2.c b/sys/v4l2/gstv4l2.c
+index 07a2873..a5683fb 100644
+--- a/sys/v4l2/gstv4l2.c
++++ b/sys/v4l2/gstv4l2.c
+@@ -28,6 +28,9 @@
+ #ifndef _GNU_SOURCE
+ # define _GNU_SOURCE            /* O_CLOEXEC */
+ #endif
++#ifndef O_CLOEXEC
++# define O_CLOEXEC 0
++#endif
+ 
+ #include "gst/gst-i18n-plugin.h"
+ 
+diff --git a/sys/v4l2/gstv4l2allocator.c b/sys/v4l2/gstv4l2allocator.c
+index 34a581b..122f937 100644
+--- a/sys/v4l2/gstv4l2allocator.c
++++ b/sys/v4l2/gstv4l2allocator.c
+@@ -24,6 +24,9 @@
+ #ifndef _GNU_SOURCE
+ # define _GNU_SOURCE            /* O_CLOEXEC */
+ #endif
++#ifndef O_CLOEXEC
++# define O_CLOEXEC 0
++#endif
+ 
+ #include "ext/videodev2.h"
+ 
+diff --git a/sys/v4l2/gstv4l2bufferpool.c b/sys/v4l2/gstv4l2bufferpool.c
+index 86d5c8b..2527adb 100644
+--- a/sys/v4l2/gstv4l2bufferpool.c
++++ b/sys/v4l2/gstv4l2bufferpool.c
+@@ -29,6 +29,9 @@
+ #ifndef _GNU_SOURCE
+ # define _GNU_SOURCE            /* O_CLOEXEC */
+ #endif
++#ifndef O_CLOEXEC
++# define O_CLOEXEC 0
++#endif
+ #include <fcntl.h>
+ 
+ #include <sys/mman.h>
+diff --git a/sys/v4l2/gstv4l2object.c b/sys/v4l2/gstv4l2object.c
+index f0f8d0b..4c916cd 100644
+--- a/sys/v4l2/gstv4l2object.c
++++ b/sys/v4l2/gstv4l2object.c
+@@ -23,6 +23,13 @@
+ #endif
+ 
+ #include <sys/stat.h>
++
++#ifndef _GNU_SOURCE
++# define _GNU_SOURCE            /* O_CLOEXEC */
++#endif
++#ifndef O_CLOEXEC
++# define O_CLOEXEC 0
++#endif
+ #include <fcntl.h>
+ #include <errno.h>
+ #include <string.h>

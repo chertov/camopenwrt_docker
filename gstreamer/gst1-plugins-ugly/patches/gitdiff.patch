@@ -1,0 +1,34 @@
+diff --git a/Makefile.am b/Makefile.am
+index ad6fd4d..080db2b 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,8 +1,8 @@
+ DISTCHECK_CONFIGURE_FLAGS=--enable-gtk-doc
+ 
+ SUBDIRS = \
+-	gst-libs gst ext docs m4 tests common pkgconfig po
+-	
++	gst-libs gst ext m4 common pkgconfig
++
+ EXTRA_DIST = \
+ 	depcomp \
+ 	AUTHORS COPYING NEWS README RELEASE REQUIREMENTS \
+diff --git a/configure.ac b/configure.ac
+index 62afc23..e10dd0c 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -420,14 +420,7 @@ ext/dvdread/Makefile
+ ext/mpeg2dec/Makefile
+ ext/sidplay/Makefile
+ ext/x264/Makefile
+-docs/Makefile
+-docs/plugins/Makefile
+-docs/version.entities
+-tests/Makefile
+-tests/check/Makefile
+-tests/files/Makefile
+ m4/Makefile
+-po/Makefile.in
+ pkgconfig/Makefile
+ pkgconfig/gstreamer-plugins-ugly-uninstalled.pc
+ )

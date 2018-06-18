@@ -1,0 +1,80 @@
+diff --git a/Makefile.am b/Makefile.am
+index 020e2e6..716d3a7 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -11,20 +11,14 @@ SUBDIRS = 			\
+ 	gst-libs 		\
+ 	gst sys $(SUBDIRS_EXT) 	\
+ 	tools 			\
+-	tests 			\
+-	docs			\
+-	po 			\
+ 	common 			\
+ 	m4
+ 
+ DIST_SUBDIRS = 			\
+ 	pkgconfig		\
+-	docs			\
+ 	gst-libs		\
+ 	gst sys ext		\
+ 	tools 			\
+-	tests 			\
+-	po 			\
+ 	common 			\
+ 	m4
+ 
+diff --git a/configure.ac b/configure.ac
+index e6401a8..a47f8ff 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -992,45 +992,6 @@ pkgconfig/gstreamer-gl.pc
+ pkgconfig/gstreamer-gl-uninstalled.pc
+ pkgconfig/gstreamer-plugins-base.pc
+ pkgconfig/gstreamer-plugins-base-uninstalled.pc
+-tests/Makefile
+-tests/check/Makefile
+-tests/examples/Makefile
+-tests/examples/app/Makefile
+-tests/examples/audio/Makefile
+-tests/examples/decodebin_next/Makefile
+-tests/examples/dynamic/Makefile
+-tests/examples/encoding/Makefile
+-tests/examples/fft/Makefile
+-tests/examples/gio/Makefile
+-tests/examples/gl/Makefile
+-tests/examples/gl/generic/Makefile
+-tests/examples/gl/generic/cube/Makefile
+-tests/examples/gl/generic/doublecube/Makefile
+-tests/examples/gl/generic/recordgraphic/Makefile
+-tests/examples/gl/generic/cubeyuv/Makefile
+-tests/examples/gl/qt/Makefile
+-tests/examples/gl/gtk/Makefile
+-tests/examples/gl/gtk/fxtest/Makefile
+-tests/examples/gl/gtk/3dvideo/Makefile
+-tests/examples/gl/gtk/switchvideooverlay/Makefile
+-tests/examples/gl/gtk/filternovideooverlay/Makefile
+-tests/examples/gl/gtk/filtervideooverlay/Makefile
+-tests/examples/gl/cocoa/Makefile
+-tests/examples/gl/sdl/Makefile
+-tests/examples/gl/clutter/Makefile
+-tests/examples/overlay/Makefile
+-tests/examples/seek/Makefile
+-tests/examples/snapshot/Makefile
+-tests/examples/playback/Makefile
+-tests/examples/playrec/Makefile
+-tests/files/Makefile
+-tests/icles/Makefile
+-tests/icles/playback/Makefile
+-docs/Makefile
+-docs/libs/Makefile
+-docs/plugins/Makefile
+-docs/version.entities
+-po/Makefile.in
+ common/Makefile
+ common/m4/Makefile
+ m4/Makefile
+@@ -1039,4 +1000,3 @@ AC_OUTPUT
+ 
+ AG_GST_OUTPUT_PLUGINS
+ ORC_OUTPUT
+-

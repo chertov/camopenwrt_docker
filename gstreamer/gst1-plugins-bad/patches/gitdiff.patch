@@ -1,0 +1,83 @@
+diff --git a/Makefile.am b/Makefile.am
+index 0783edf..9d4193c 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -2,11 +2,11 @@ DISTCHECK_CONFIGURE_FLAGS=--enable-gtk-doc
+ 
+ SUBDIRS = \
+ 	gst-libs gst sys ext pkgconfig \
+-	m4 common docs tests po tools
++	m4 common tools
+ 
+ DIST_SUBDIRS = \
+ 	gst gst-libs sys ext pkgconfig \
+-	m4 common docs tests po tools
++	m4 common tools
+ 
+ EXTRA_DIST = \
+ 	depcomp \
+diff --git a/configure.ac b/configure.ac
+index 338ed61..7c51ca0 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -2600,24 +2600,6 @@ sys/vdpau/Makefile
+ sys/wasapi/Makefile
+ sys/winks/Makefile
+ sys/winscreencap/Makefile
+-tests/Makefile
+-tests/check/Makefile
+-tests/files/Makefile
+-tests/examples/Makefile
+-tests/examples/avsamplesink/Makefile
+-tests/examples/camerabin2/Makefile
+-tests/examples/codecparsers/Makefile
+-tests/examples/compositor/Makefile
+-tests/examples/directfb/Makefile
+-tests/examples/audiomixmatrix/Makefile
+-tests/examples/ipcpipeline/Makefile
+-tests/examples/mpegts/Makefile
+-tests/examples/mxf/Makefile
+-tests/examples/opencv/Makefile
+-tests/examples/uvch264/Makefile
+-tests/examples/waylandsink/Makefile
+-tests/examples/webrtc/Makefile
+-tests/icles/Makefile
+ ext/voamrwbenc/Makefile
+ ext/voaacenc/Makefile
+ ext/assrender/Makefile
+@@ -2686,11 +2668,6 @@ ext/dtls/Makefile
+ ext/webrtc/Makefile
+ ext/webrtcdsp/Makefile
+ ext/ttml/Makefile
+-po/Makefile.in
+-docs/Makefile
+-docs/plugins/Makefile
+-docs/libs/Makefile
+-docs/version.entities
+ pkgconfig/Makefile
+ pkgconfig/gstreamer-plugins-bad.pc
+ pkgconfig/gstreamer-plugins-bad-uninstalled.pc
+@@ -2718,4 +2695,3 @@ AC_OUTPUT
+ 
+ AG_GST_OUTPUT_PLUGINS
+ ORC_OUTPUT
+-
+diff --git a/sys/msdk/gstmsdkcontext.c b/sys/msdk/gstmsdkcontext.c
+index e455152..d256684 100644
+--- a/sys/msdk/gstmsdkcontext.c
++++ b/sys/msdk/gstmsdkcontext.c
+@@ -31,6 +31,14 @@
+  */
+ 
+ #include "gstmsdkcontext.h"
++
++#ifndef _GNU_SOURCE
++# define _GNU_SOURCE            /* O_CLOEXEC */
++#endif
++#ifndef O_CLOEXEC
++# define O_CLOEXEC 0
++#endif
++
+ #ifndef _WIN32
+ #include <fcntl.h>
+ #include <unistd.h>

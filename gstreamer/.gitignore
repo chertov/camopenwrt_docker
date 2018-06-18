@@ -1,0 +1,12 @@
+*
+!*/
+
+!Makefile
+!Config.in
+!*.patch
+
+!/*.md
+!Dockerfile
+
+!.dockerignore
+!.gitignore
