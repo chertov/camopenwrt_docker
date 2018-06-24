@@ -5,7 +5,7 @@ set -e
 GLUTINIUM_REPOSITORY=$(pwd)/glutinium/
 if [ ! -d "$GLUTINIUM_REPOSITORY" ]; then
     # repository doesn't exists
-    git clone git@github.com:ZigFisher/Glutinium.git $GLUTINIUM_REPOSITORY
+    git clone https://github.com/ZigFisher/Glutinium.git $GLUTINIUM_REPOSITORY
 else
     git -C $GLUTINIUM_REPOSITORY pull
 fi
