@@ -2,6 +2,10 @@
 set -e
 if [ ! -d $(pwd)/output/ ]; then mkdir -p $(pwd)/output/; fi
 
+# # Clean the exited containers, the untagged images (or old images)
+# ( docker rm $( docker ps -a | grep Exit | cut -d ' ' -f 1) || exit 0 )
+# ( docker rmi $(docker images | tail -n +2 | awk '$1 == "<none>" {print $'3'}') || exit 0 )
+
 OPENWRT_REPOSITORY=$(pwd)/chaos_calmer/
 if [ ! -d "$OPENWRT_REPOSITORY" ]; then
     # repository doesn't exists

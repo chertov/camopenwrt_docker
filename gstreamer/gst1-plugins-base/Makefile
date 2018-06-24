@@ -23,6 +23,7 @@ PKG_SOURCE_URL:=http://gstreamer.freedesktop.org/src/gst-plugins-base/
 PKG_HASH:=4c306b03df0212f1b8903784e29bb3493319ba19ebebf13b0c56a17870292282
 
 PKG_CONFIG_DEPENDS:= \
+	CONFIG_PACKAGE_gst1-mod-alsa \
 	CONFIG_PACKAGE_gst1-mod-app \
 	CONFIG_PACKAGE_gst1-mod-audioconvert \
 	CONFIG_PACKAGE_gst1-mod-audiorate \
@@ -30,6 +31,7 @@ PKG_CONFIG_DEPENDS:= \
 	CONFIG_PACKAGE_gst1-mod-audiotestsrc \
 	CONFIG_PACKAGE_gst1-mod-gio \
 	CONFIG_PACKAGE_gst1-mod-ogg \
+	CONFIG_PACKAGE_gst1-mod-opus \
 	CONFIG_PACKAGE_gst1-mod-tcp \
 	CONFIG_PACKAGE_gst1-mod-theora \
 	CONFIG_PACKAGE_gst1-mod-videoconvert \
@@ -117,6 +119,7 @@ CONFIGURE_ARGS += \
 	--disable-debug \
 	--disable-examples \
 	\
+	$(call GST_COND_SELECT,alsa) \
 	$(call GST_COND_SELECT,app) \
 	$(call GST_COND_SELECT,audioconvert) \
 	$(call GST_COND_SELECT,audiorate) \
@@ -127,6 +130,7 @@ CONFIGURE_ARGS += \
 	$(call GST_COND_SELECT,gio) \
 	--disable-libvisual \
 	$(call GST_COND_SELECT,ogg) \
+	$(call GST_COND_SELECT,opus) \
 	--disable-pango \
 	--disable-subparse \
 	$(call GST_COND_SELECT,tcp) \
@@ -264,6 +268,7 @@ define GstBuildPlugin
   $$(eval $$(call BuildPackage,gst1-mod-$(1)))
 endef
 
+$(eval $(call GstBuildPlugin,alsa,ALSA,audio tag,,+alsa-lib))
 $(eval $(call GstBuildPlugin,app,app,app,,))
 $(eval $(call GstBuildPlugin,audioconvert,audio format conversion,audio,,))
 $(eval $(call GstBuildPlugin,audiorate,audio rate adjusting,audio tag,,))

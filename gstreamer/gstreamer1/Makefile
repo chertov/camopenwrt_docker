@@ -103,7 +103,7 @@ endef
 define Package/libgstreamer1
   $(call Package/gstreamer1/Default)
   TITLE+= library (core)
-  DEPENDS+= +glib2 +libpthread +libxml2
+  DEPENDS+= +glib2 +libpthread +libxml2 +librt
   HIDDEN:=1
 endef
 
