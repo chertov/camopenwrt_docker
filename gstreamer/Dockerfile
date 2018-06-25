@@ -228,8 +228,8 @@ RUN    make ${MAKE_ARGS} package/gstreamer1/compile \
 # CONFIG_PACKAGE_libtheora=y\n\
 # " >> .config
 COPY ./gst1-plugins-base /src/chaos_calmer/feeds/packages/multimedia/gst1-plugins-base
-RUN    ( make ${MAKE_ARGS} package/gst1-plugins-base/compile; exit 0) \
-    && ( make ${MAKE_ARGS} package/gst1-plugins-base/install; exit 0)
+RUN    make ${MAKE_ARGS} package/gst1-plugins-base/compile \
+    && make ${MAKE_ARGS} package/gst1-plugins-base/install
 
 # RUN printf "\n\
 # CONFIG_PACKAGE_libflac=y\n\
