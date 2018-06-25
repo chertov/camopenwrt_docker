@@ -4,4 +4,5 @@
 !/zft_patches/**/*.patch
 !/rootfs.cpio.gz
 
+!.dockerignore
 !.gitignore
