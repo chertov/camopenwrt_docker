@@ -1,5 +1,11 @@
 FROM openwrt
 
+#dirty hack
+RUN sed -i 's/FILES:= \\/#FILES:= \\/g' /src/chaos_calmer/package/kernel/linux/modules/usb.mk
+RUN sed -i 's/\$\(LINUX_DIR\)\/drivers\/usb\/core\/usbcore\.ko/#\$\(LINUX_DIR\)\/drivers\/usb\/core\/usbcore\.ko/g' /src/chaos_calmer/package/kernel/linux/modules/usb.mk
+RUN sed -i 's/\$\(LINUX_DIR\)\/drivers\/usb\/common\/usb-common\.ko/#\$\(LINUX_DIR\)\/drivers\/usb\/common\/usb-common\.ko/g' /src/chaos_calmer/package/kernel/linux/modules/usb.mk
+RUN sed -i 's/AUTOLOAD:=$(call AutoLoad,20,usb-common usbcore,1)/#AUTOLOAD:=$(call AutoLoad,20,usb-common usbcore,1)/g' /src/chaos_calmer/package/kernel/linux/modules/usb.mk
+
 ARG MAKE_ARGS=-j7
 # ARG MAKE_ARGS="-j1 V=s"
 
