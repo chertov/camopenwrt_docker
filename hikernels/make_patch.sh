@@ -1,15 +1,17 @@
 #/bin/sh
 set -e
 
-function make_patch {
-    local kernel_version=$1
-    if [ ! -d "./linux-$kernel_version" ]; then return; fi
 
-    local patches_path=$(pwd)/data_$kernel_version/patches/
+make_patch () {
+    local kernel_version=$1
+    local hikernels_path=$(realpath $(dirname "$0"))
+    if [ ! -d "$hikernels_path/linux-$kernel_version" ]; then return; fi
+    local patches_path=$hikernels_path/data_$kernel_version/patches/
+    echo $patches_path
     if [ ! -d "$patches_path" ]; then mkdir -p $patches_path; fi
 
     (
-        cd linux-$kernel_version
+        cd $hikernels_path/linux-$kernel_version
         git diff --src-prefix=linux-3.4.35/ --dst-prefix=linux-3.4.y/ > $patches_path/010-ethernet.patch
     )
 }

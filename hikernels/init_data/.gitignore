@@ -1,0 +1,7 @@
+*
+!*/
+
+!/zft_patches/**/*.patch
+!/rootfs.cpio.gz
+
+!.gitignore

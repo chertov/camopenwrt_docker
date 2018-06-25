@@ -8,5 +8,4 @@
 
 !.gitignore
 
-/original_kernels
 /linux*

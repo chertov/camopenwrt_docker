@@ -1,17 +1,20 @@
-FROM kernel_src_3.4.35
+FROM kernels_src
 
-RUN locale-gen en_US.utf8
-RUN wget https://buildroot.org/downloads/buildroot-2018.05.tar.gz
+ARG MAKE_ARGS=-j7
 
+WORKDIR /src/linux-3.4.y/
+RUN    cp arch/arm/configs/hi3518ev200_full_defconfig .config \
+    && sed -i "s/CONFIG_INITRAMFS_SOURCE=\"\"/CONFIG_INITRAMFS_SOURCE=\"\/src\/rootfs\.cpio\.gz\"/g" .config \
+    && printf "\nCONFIG_INITRAMFS_ROOT_UID=0\n\
+CONFIG_INITRAMFS_ROOT_GID=0\n" >> .config
 
-RUN cp ./arch/arm/configs/hi3518ev200_full_defconfig  ./.config
-RUN make ARCH=arm -j7 hi3518ev200_full_defconfig
-RUN make ARCH=arm -j7 uImage dtbs modules
-RUN echo "#!/bin/bash\n \
-# set -e\n \
-# rm -rf /output/*\n \
-# cp -r /src/chaos_calmer/bin/hisilicon/* /output/\n \
-" >> copy.sh && chmod 777 copy.sh
+RUN    make ARCH=arm CROSS_COMPILE=/usr/bin/arm-linux-gnueabi- ${MAKE_ARGS} oldconfig \
+    && make ARCH=arm CROSS_COMPILE=/usr/bin/arm-linux-gnueabi- ${MAKE_ARGS} uImage modules dtbs
 
-ENTRYPOINT ["./copy.sh"]
-CMD []
+COPY ./patches /src/patches
+
+# ARG MAKE_ARGS="-j1 V=s"
+RUN ( cd /src/ && for i in ./patches/*.patch; do patch -s -p0 < $i; done ) \
+    && make ARCH=arm CROSS_COMPILE=/usr/bin/arm-linux-gnueabi- ${MAKE_ARGS} uImage modules dtbs
+
+RUN ls /src
