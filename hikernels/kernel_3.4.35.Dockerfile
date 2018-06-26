@@ -16,5 +16,3 @@ COPY ./patches /src/patches
 # ARG MAKE_ARGS="-j1 V=s"
 RUN ( cd /src/ && for i in ./patches/*.patch; do patch -s -p0 < $i; done ) \
     && make ARCH=arm CROSS_COMPILE=/usr/bin/arm-linux-gnueabi- ${MAKE_ARGS} uImage modules dtbs
-
-RUN ls /src
