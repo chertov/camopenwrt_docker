@@ -31,7 +31,6 @@ PKG_CONFIG_DEPENDS:= \
 	CONFIG_PACKAGE_gst1-mod-audiotestsrc \
 	CONFIG_PACKAGE_gst1-mod-gio \
 	CONFIG_PACKAGE_gst1-mod-ogg \
-	CONFIG_PACKAGE_gst1-mod-opus \
 	CONFIG_PACKAGE_gst1-mod-tcp \
 	CONFIG_PACKAGE_gst1-mod-theora \
 	CONFIG_PACKAGE_gst1-mod-videoconvert \
@@ -130,7 +129,6 @@ CONFIGURE_ARGS += \
 	$(call GST_COND_SELECT,gio) \
 	--disable-libvisual \
 	$(call GST_COND_SELECT,ogg) \
-	$(call GST_COND_SELECT,opus) \
 	--disable-pango \
 	--disable-subparse \
 	$(call GST_COND_SELECT,tcp) \
