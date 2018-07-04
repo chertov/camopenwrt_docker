@@ -82,7 +82,7 @@ RUN    printf "CONFIG_PACKAGE_libmpeg2=y\n" >> .config \
 RUN    rm -rf ./feeds/packages/multimedia/gstreamer1 \
     && rm -rf ./feeds/packages/multimedia/gst1-plugins-base \
     && rm -rf ./feeds/packages/multimedia/gst1-plugins-bad \
-    && rm -rf ./feeds/packages/multimedia/gst1-plugins-ugly \
+    #&& rm -rf ./feeds/packages/multimedia/gst1-plugins-ugly \
     && rm -rf ./feeds/packages/multimedia/gst1-plugins-good\
     && rm -rf ./feeds/packages/multimedia/gst1-libav
 
@@ -267,7 +267,7 @@ RUN    make ${MAKE_ARGS} package/gst1-plugins-bad/compile \
 # CONFIG_PACKAGE_libmpeg2=y\n\
 # " >> .config
 ARG MAKE_ARGS="-j1 V=s"
-COPY ./gst1-plugins-ugly /src/chaos_calmer/feeds/packages/multimedia/gst1-plugins-ugly
+#COPY ./gst1-plugins-ugly /src/chaos_calmer/feeds/packages/multimedia/gst1-plugins-ugly
 RUN    make ${MAKE_ARGS} package/gst1-plugins-ugly/compile \
     && make ${MAKE_ARGS} package/gst1-plugins-ugly/install
 
