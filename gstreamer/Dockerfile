@@ -139,7 +139,6 @@ CONFIG_PACKAGE_gst1-mod-jpegformat=y\n\
 CONFIG_PACKAGE_gst1-mod-lame=y\n\
 CONFIG_PACKAGE_gst1-mod-level=y\n\
 CONFIG_PACKAGE_gst1-mod-liveadder=y\n\
-CONFIG_PACKAGE_gst1-mod-mad=y\n\
 CONFIG_PACKAGE_gst1-mod-matroska=y\n\
 CONFIG_PACKAGE_gst1-mod-mpeg2dec=y\n\
 CONFIG_PACKAGE_gst1-mod-mpegpsdemux=y\n\
